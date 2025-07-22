@@ -1,0 +1,231 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document Context Extractor</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .content-box {
+      border: 1px solid #ddd;
+      padding: 20px;
+      margin-bottom: 30px;
+      border-radius: 8px;
+      background: white;
+    }
+    .file-header {
+      font-weight: bold;
+      font-size: 1.25rem;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    .page-label {
+      font-weight: 500;
+      font-size: 1rem;
+      color: #555;
+      margin-top: 10px;
+    }
+    .content-type-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #0056b3;
+      margin-top: 15px;
+    }
+    .content-type-paragraph {
+      margin-top: 10px;
+      white-space: pre-wrap;
+    }
+    .content-type-table {
+      margin-top: 10px;
+    }
+    .table td, .table th {
+      border: 1px solid #ccc;
+      padding: 8px;
+      font-size: 14px;
+    }
+    .content-string {
+      font-style: italic;
+      color: #777;
+    }
+    .content-image {
+      color: green;
+      font-weight: bold;
+    }
+    .unsupported {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body class="bg-light">
+  <div class="container py-5">
+    <h2 class="text-primary mb-4">📄 Intelligent Document Extraction</h2>
+
+    ✅ Reset Button -->
+    <!-- <div class="mb-3">
+      <a href="/reset" class="btn btn-outline-danger">Reset</a>
+    </div>
+
+    <form method="POST" enctype="multipart/form-data" class="mb-4">
+      <div class="input-group">
+        <input class="form-control" type="file" name="documents" id="documents" multiple>
+        <button type="submit" class="btn btn-primary">Extract</button>
+      </div>
+    </form>
+
+    {% if error %}
+      <div class="alert alert-danger">{{ error }}</div>
+    {% endif %}
+
+    {% if data %}
+      <div class="mb-3">
+        <a href="/download" class="btn btn-success">Download as DOCX</a>
+      </div>
+      {% for row in data %}
+        <div class="content-box">
+          <div class="file-header">📂 {{ row.Filename }} — Page {{ row['Page Number'] }}</div>
+
+          {% for item in row.Content %}
+            {% if item[0] == 'Title' %}
+              <div class="content-type-title">{{ item[1] }}</div>
+            {% elif item[0] == 'Paragraph' %}
+              <div class="content-type-paragraph">{{ item[1] }}</div>
+            {% elif item[0] == 'String' %}
+              <div class="content-string">{{ item[1] }}</div>
+            {% elif item[0] == 'Table' %}
+              <div class="content-type-table">
+                <table class="table table-bordered table-striped table-sm">
+                  {% for line in item[1].split('\n') %}
+                    <tr>
+                      {% for col in line.split('\t') %}
+                        <td>{{ col }}</td>
+                      {% endfor %}
+                    </tr>
+                  {% endfor %}
+                </table>
+              </div>
+            {% elif item[0] == 'Image' %}
+              <div class="content-image">🖼️ Image Placeholder: {{ item[1] }}</div>
+            {% else %}
+              <div class="unsupported">{{ item[0] }}: {{ item[1] }}</div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document Context Extractor</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .content-box {
+      border: 1px solid #ddd;
+      padding: 20px;
+      margin-bottom: 30px;
+      border-radius: 8px;
+      background: white;
+    }
+    .file-header {
+      font-weight: bold;
+      font-size: 1.25rem;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    .page-label {
+      font-weight: 500;
+      font-size: 1rem;
+      color: #555;
+      margin-top: 10px;
+    }
+    .content-type-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #0056b3;
+      margin-top: 15px;
+    }
+    .content-type-paragraph {
+      margin-top: 10px;
+      white-space: pre-wrap;
+    }
+    .content-type-table {
+      margin-top: 10px;
+    }
+    .table td, .table th {
+      border: 1px solid #ccc;
+      padding: 8px;
+      font-size: 14px;
+    }
+    .content-string {
+      font-style: italic;
+      color: #777;
+    }
+    .content-image {
+      color: green;
+      font-weight: bold;
+    }
+    .unsupported {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body class="bg-light">
+  <div class="container py-5">
+    <h2 class="text-primary mb-4">📄 Intelligent Document Extraction</h2>
+
+    <form method="POST" enctype="multipart/form-data" class="mb-4">
+      <div class="input-group">
+        <input class="form-control" type="file" name="documents" id="documents" multiple>
+        <button type="submit" class="btn btn-primary">Extract</button>
+        <button type="button" class="btn btn-outline-secondary" onclick="window.location.href='/'">Reset</button>
+      </div>
+    </form>
+
+    {% if error %}
+      <div class="alert alert-danger">{{ error }}</div>
+    {% endif %}
+
+    {% if data %}
+      <div class="mb-3">
+        <a href="/download" class="btn btn-success">Download as DOCX</a>
+      </div>
+      {% for row in data %}
+        <div class="content-box">
+          <div class="file-header">📂 {{ row.Filename }} — Page {{ row['Page Number'] }}</div>
+
+          {% for item in row.Content %}
+            {% if item[0] == 'Title' %}
+              <div class="content-type-title">{{ item[1] }}</div>
+            {% elif item[0] == 'Paragraph' %}
+              <div class="content-type-paragraph">{{ item[1] }}</div>
+            {% elif item[0] == 'String' %}
+              <div class="content-string">{{ item[1] }}</div>
+            {% elif item[0] == 'Table' %}
+              <div class="content-type-table">
+                <table class="table table-bordered table-striped table-sm">
+                  {% for line in item[1].split('\n') %}
+                    <tr>
+                      {% for col in line.split('\t') %}
+                        <td>{{ col }}</td>
+                      {% endfor %}
+                    </tr>
+                  {% endfor %}
+                </table>
+              </div>
+            {% elif item[0] == 'Image' %}
+              <div class="content-image">🖼️ Image Placeholder: {{ item[1] }}</div>
+            {% else %}
+              <div class="unsupported">{{ item[0] }}: {{ item[1] }}</div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+</body>
+</html>
